@@ -3,53 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currys Interest Bearing Credit Calculator</title>
+    <title>Currys 29.9% APR Interest Bearing Credit Calculator</title>
     <link rel="icon" href="https://www.currys.co.uk/on/demandware.static/-/Sites-curryspcworlduk-Library/default/dwac98490e/images/brand-currys-logo.svg">
     <style>
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            @font-face { font-family: 'CurrysSans Headline'; src: url('https://currys-ssl.cdn.dixons.com/css/themes/email/Assets/brightWorld/css/curryssansheadline.woff') format('woff');}
+            @font-face { font-family: 'CurrysSans Regular'; src: url('https://currys-ssl.cdn.dixons.com/css/themes/email/Assets/brightWorld/css/curryssansregular.woff') format('woff');}
+        }       
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'CurrysSans Regular', Arial, sans-serif;
             background-color: #f5f7fa;
             color: #333;
             text-align: center;
-            padding: 20px;
+            padding: 10px;
         }
         .container {
             max-width: 600px;
             margin: auto;
+            text-align: left;
+        }     
+        h1, h2, h3, h4, h5, h6, .footnote strong {
+            font-family: 'CurrysSans Headline', Arial, sans-serif;
+        }  
+        ul {
+            margin: 10px;
+        }
+        .centered-content {
+            text-align: center;
+            padding: 15px 0;
+        }
+        .bullet-container {
+            max-width: 500px;
+            margin: auto;
+            text-align: left;
+        }
+        .footnote {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            text-align: left;
+        }
+        pre {
+            font-size: 1.3em;
+            font-weight: bold;
         }
         img {
-            max-width: 200px;
-            margin-bottom: 20px;
+            max-width: 180px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         input[type=number] {
-            padding: 8px;
-            font-size: 1.2em;
-            width: 150px;
+            padding: 5px;
+            font-size: 1.1em;
+            width: 140px;
             text-align: center;
             border-radius: 4px;
             border: 1px solid #ccc;
+            display: block;
+            margin: auto;
         }
         .result {
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             color: #005bac;
-            margin-top: 10px;
-        }
-        .small {
-            font-size: 0.9em;
+            margin-top: 5px;
+            text-align: center;
         }
         .warning {
             color: #d9534f;
-        }
-        .info {
-            color: #28a745;
-        }
-        h1, h2, h3 {
-            margin: 10px 0;
-        }
-        .small-text {
-            font-size: 0.9em;
-            color: #555;
         }
     </style>
 </head>
@@ -58,27 +83,36 @@
 <div class="container">
     <img src="https://www.currys.co.uk/on/demandware.static/-/Sites-curryspcworlduk-Library/default/dwac98490e/images/brand-currys-logo.svg" alt="Currys Logo">
 
-    <h1>Currys Interest Bearing Credit Calculator</h1>
+    <h1 class="centered-content">Currys 29.9% APR Interest Bearing Credit Calculator</h1>
 
-    <p><strong>✅ Recommended Threshold</strong></p>
-    <ul style="text-align: left; display: inline-block;">
-        <li>Recommended product price: <strong>£135.00 or higher</strong>.</li>
-        <li>Ensures monthly payments remain above <strong>£5.00</strong>.</li>
-        <li>Lower values (around £125) risk nearing legal minimum.</li>
-    </ul>
+    <div class="bullet-container">
+        <p><strong>✅ Recommended Threshold</strong></p>
+        <ul>
+            <li>Recommended product price: <strong>£135.00 or higher</strong>.</li>
+            <li>Ensures monthly payments remain above <strong>£5.00</strong>.</li>
+            <li>Lower values (around £125) risk nearing legal minimum.</li>
+        </ul>
 
-    <p><strong>🚨 Legal Compliance</strong></p>
-    <ul style="text-align: left; display: inline-block;">
-        <li>Monthly installment amounts must <strong>never be shown below £5.00</strong>.</li>
-        <li>This logic is consistent across all Currys Movable Ink App integrations.</li>
-    </ul>
+        <p><strong>🚨 Legal Compliance</strong></p>
+        <ul>
+            <li>Monthly installment amounts must <strong>never be shown below £5.00</strong>.</li>
+            <li>This logic is consistent across all Currys Movable Ink App integrations.</li>
+        </ul>
+    </div>
 
-    <br>
+    <div class="centered-content">
+        <label for="basketValue">Enter Product Price (£):</label><br>
+        <input type="number" id="basketValue" value="135" min="0" step="0.01">
+        <div class="result" id="monthlyPayment"></div>
+    </div>
 
-    <label for="basketValue">Enter Product Price (£):</label><br>
-    <input type="number" id="basketValue" value="135" min="0" step="0.01">
-
-    <div class="result" id="monthlyPayment"></div>
+    <div class="footnote">
+        <h3>Calculation Details</h3>
+        <h4>🔢 Interest Bearing Credit (IBC) Monthly Payment Factor</h4>
+        <pre>0.0405289500608575</pre>
+        <p>Previously referred to informally as the "Magic Number." This factor determines how monthly payments are calculated for products eligible for Currys IBC financing.</p>
+        <p><strong>APR Rate:</strong> 29.9% | <strong>Term:</strong> 36 months (3 years)</p>
+    </div>
 </div>
 
 <script>
