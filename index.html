@@ -3,10 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Page</title>
+    <title>Currys Interest Bearing Credit Calculator</title>
+    <link rel="icon" href="https://www.currys.co.uk/on/demandware.static/-/Sites-curryspcworlduk-Library/default/dwac98490e/images/brand-currys-logo.svg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        img {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+        input[type=number] {
+            padding: 8px;
+            font-size: 1.2em;
+            width: 150px;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .result {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #005bac;
+            margin-top: 10px;
+        }
+        .small {
+            font-size: 0.9em;
+        }
+        .warning {
+            color: #d9534f;
+        }
+        .info {
+            color: #28a745;
+        }
+        h1, h2, h3 {
+            margin: 10px 0;
+        }
+        .small-text {
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, GitHub Pages!</h1>
-    <p>This is my simple static site hosted on GitHub Pages.</p>
+
+<div class="container">
+    <img src="https://www.currys.co.uk/on/demandware.static/-/Sites-curryspcworlduk-Library/default/dwac98490e/images/brand-currys-logo.svg" alt="Currys Logo">
+
+    <h1>Currys Interest Bearing Credit Calculator</h1>
+
+    <p><strong>✅ Recommended Threshold</strong></p>
+    <ul style="text-align: left; display: inline-block;">
+        <li>Recommended product price: <strong>£135.00 or higher</strong>.</li>
+        <li>Ensures monthly payments remain above <strong>£5.00</strong>.</li>
+        <li>Lower values (around £125) risk nearing legal minimum.</li>
+    </ul>
+
+    <p><strong>🚨 Legal Compliance</strong></p>
+    <ul style="text-align: left; display: inline-block;">
+        <li>Monthly installment amounts must <strong>never be shown below £5.00</strong>.</li>
+        <li>This logic is consistent across all Currys Movable Ink App integrations.</li>
+    </ul>
+
+    <br>
+
+    <label for="basketValue">Enter Product Price (£):</label><br>
+    <input type="number" id="basketValue" value="135" min="0" step="0.01">
+
+    <div class="result" id="monthlyPayment"></div>
+</div>
+
+<script>
+    const APR_FACTOR = 0.0405289500608575;
+
+    function calculateMonthlyPayment(value) {
+        const monthly = parseFloat(value * APR_FACTOR);
+        return (Math.floor(monthly * 100) / 100).toFixed(2);
+    }
+
+    function updateMonthlyPayment() {
+        const basketValue = parseFloat(document.getElementById('basketValue').value);
+        const resultDiv = document.getElementById('monthlyPayment');
+
+        if (isNaN(basketValue) || basketValue <= 0) {
+            resultDiv.innerHTML = "Please enter a product price £135 or above.";
+            resultDiv.className = 'info';
+        } else {
+            const monthlyPayment = calculateMonthlyPayment(basketValue);
+
+            if (basketValue >= 135) {
+                resultDiv.innerHTML = `from £${monthlyPayment} a month (over 36 monthly payments*)`;
+                resultDiv.className = 'result';
+            } else {
+                resultDiv.innerHTML = `⚠️ Movable Ink Apps hides monthly pricing below £135.<br><span class="small">Calculated monthly: £${monthlyPayment}/month (over 36 payments*)</span>`;
+                resultDiv.classList.add('warning');
+            }
+        }
+    }
+
+    document.getElementById('basketValue').addEventListener('input', updateMonthlyPayment);
+
+    // Initialize on page load
+    updateMonthlyPayment();
+</script>
+
 </body>
 </html>
